@@ -1,4 +1,5 @@
-﻿using GerenciadorTarefas.Communication.Responses;
+﻿using GerenciadorTarefas.Communication.Enums;
+using GerenciadorTarefas.Communication.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.Intrinsics.X86;
@@ -18,25 +19,25 @@ public class GerenciadorTarefasController : ControllerBase
               Id = 1,
               Name = "Estudar React",
               Description = "Estudar React nos próximos meses",
-              Priority = "Alta",
+              Priority = TasksPriority.Alta, // usa ENUM
               FinishTaskUntil = DateTime.Now.AddDays(7),
-              Status = "Em andamento"
+              Status = TasksStatus.AFazer, // usa ENUM
             },
             new TasksJson {
               Id = 2,
               Name = "Estudar C#",
               Description = "Estudar C# nos próximos dias",
-              Priority = "Alta",
+              Priority = TasksPriority.Alta,
               FinishTaskUntil = DateTime.Now.AddDays(5),
-              Status = "Em andamento"
+              Status = TasksStatus.EmAndamento,
             },
              new TasksJson {
               Id = 3,
               Name = "Estudar Inglês",
               Description = "Estudar Inglês nos próximos dias",
-              Priority = "Alta",
+              Priority = TasksPriority.Alta,
               FinishTaskUntil = DateTime.Now.AddDays(3),
-              Status = "Em andamento"
+              Status = TasksStatus.EmAndamento,
             },
 
         };
@@ -45,8 +46,10 @@ public class GerenciadorTarefasController : ControllerBase
     [HttpGet]
     public IActionResult GetAll()
     {
+       
         return Ok(tasks);
     }
+
 
     // GET: api/GerenciadorTarefas/{id}
     [HttpGet("{id}")]
